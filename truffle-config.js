@@ -20,7 +20,6 @@
 
 const HDWalletProvider = require('@truffle/hdwallet-provider');
 
-const infuraKey = '';
 const mnemonic = '';
 
 module.exports = {
@@ -30,14 +29,14 @@ module.exports = {
       port: 8545,
       network_id: '*',
     },
-    polygonmainnet: {
+    mainnet: {
 			provider: function() {
 				return new HDWalletProvider(mnemonic, 'https://polygon-rpc.com/');
 			  },
 			  network_id: 137,
         gas: 6000000
 		},
-		polygonmumbai: {
+		testnet: {
 			provider: function() {
 				return new HDWalletProvider(mnemonic, 'https://rpc-mumbai.maticvigil.com');
 			  },

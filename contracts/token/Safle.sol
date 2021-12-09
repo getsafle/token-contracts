@@ -11,8 +11,6 @@ contract SafleToken is ERC20, Ownable {
     string constant _name = "Safle";
     string constant _symbol = "SAFLE";
 
-    // mapping(address => uint256) override private _balances;
-
     // mappings to keep track of delegations and change in the user balance for voting rights
     mapping (address => address) public delegates;
     mapping (address => uint256) public numCheckpoints;
