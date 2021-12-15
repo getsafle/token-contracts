@@ -47,7 +47,6 @@ contract SafleToken is ERC20, Ownable {
 
     // set the governance contract
     function setGovernance(address _governance) public onlyOwner {
-        require(msg.sender == governance, "not governance contract");
         governance = _governance;
     }
 
