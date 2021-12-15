@@ -282,5 +282,5 @@ contract SafleToken is ERC20, Ownable {
 
     event DelegateChanged(address indexed delegator, address indexed fromDelegate, address indexed toDelegate);
     event DelegateVotesChanged(address indexed delegate, uint previousBalance, uint newBalance);
-    event Approval(address indexed owner, address indexed spender, uint256 value);
+
 }
