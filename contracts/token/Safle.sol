@@ -18,7 +18,7 @@ contract SafleToken is ERC20, Ownable {
     mapping (address => uint256) public nonces;
 
     // Allowance amounts on behalf of others
-    mapping (address => mapping (address => uint96)) private allowances;
+    mapping (address => mapping (address => uint256)) private allowances;
     
     // The EIP-712 typehash for the contract's domain
     bytes32 public constant DOMAIN_TYPEHASH = keccak256("EIP712Domain(string name,uint256 chainId,address verifyingContract)");
@@ -77,6 +77,61 @@ contract SafleToken is ERC20, Ownable {
         }
 
         _transfer(src, dst, amount);
+
+        return true;
+    }
+
+    /**
+     * @notice Approve the passed address to spend the specified amount of tokens on behalf of msg.sender.
+     * @param spender The address of the spending account
+     * @param amount The number of tokens for allowance
+     * @return Whether or not the approval succeeded
+     */
+    function approve(address spender, uint256 amount) public virtual override returns (bool) {
+        _approve(_msgSender(), spender, amount);
+        return true;
+    }
+
+    function _approve(
+        address owner,
+        address spender,
+        uint256 amount
+    ) override internal {
+        require(owner != address(0), "ERC20: approve from the zero address");
+        require(spender != address(0), "ERC20: approve to the zero address");
+
+        allowances[owner][spender] = amount;
+        emit Approval(owner, spender, amount);
+    }
+
+    /// returns the allowance for a spender
+    function allowance(address owner, address spender) public view virtual override returns (uint256) {
+        return allowances[owner][spender];
+    }
+
+    /**
+     * @notice increase the spender's allowance
+     * @param spender The address of the spender
+     * @param addedValue The value to be added
+     * @return Whether or not the decrease allowance succeeded
+     */
+    function increaseAllowance(address spender, uint256 addedValue) public virtual override returns (bool) {
+        _approve(_msgSender(), spender, allowances[_msgSender()][spender] + addedValue);
+        return true;
+    }
+
+    /**
+     * @notice decrease the spender's allowance
+     * @param spender The address of the spender
+     * @param subtractedValue The value to be subtracted
+     * @return Whether or not the decrease allowance succeeded
+     */
+    function decreaseAllowance(address spender, uint256 subtractedValue) public virtual override returns (bool) {
+        uint256 currentAllowance = allowances[_msgSender()][spender];
+        require(currentAllowance >= subtractedValue, "ERC20: decreased allowance below zero");
+        unchecked {
+            _approve(_msgSender(), spender, currentAllowance - subtractedValue);
+        }
 
         return true;
     }
@@ -227,5 +282,5 @@ contract SafleToken is ERC20, Ownable {
 
     event DelegateChanged(address indexed delegator, address indexed fromDelegate, address indexed toDelegate);
     event DelegateVotesChanged(address indexed delegate, uint previousBalance, uint newBalance);
-
+    event Approval(address indexed owner, address indexed spender, uint256 value);
 }
