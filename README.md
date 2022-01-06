@@ -30,4 +30,5 @@ Methods to get the vesting schedule by index/beneficiary or by vesting schedule 
 | Contract Name         | Network       | Contract Address                           |
 |:---------------------:|:-------------:|:------------------------------------------:|
 | Token Contract        | Testnet       | [0x1400cafa9c961e124265fac06e4a009fc7d93a3d](https://mumbai.polygonscan.com/tx/0x63699109406a619255cff029758db510f20a9fa9b9a190acc5546d75596998d0) |
+| Token Contract        | Mainnet       | [0x04b33078Ea1aEf29bf3fB29c6aB7B200C58ea126](https://polygonscan.com/address/0x04b33078ea1aef29bf3fb29c6ab7b200c58ea126) |
 | Vesting Contract      | Testnet       | [0x9a8cb9d7fb371ed4845a863979ec3f0578deb726](https://mumbai.polygonscan.com/tx/0xac22d4e9fdb0d8fc5b451356fc7c582cfb97a7f9aa0f1d33c7d0b3ddbf0e4c83) |
