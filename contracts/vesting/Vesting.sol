@@ -299,7 +299,8 @@ contract Vesting is Ownable, ReentrancyGuard{
         public
         view
         returns(VestingSchedule memory){
-        return vestingSchedules[computeVestingScheduleIdForAddressAndIndex(holder, holdersVestingCount[holder] - 1)];
+            require(holdersVestingCount[holder] > 0, "Vesting::This address doesn't have any vested tokens");
+            return vestingSchedules[computeVestingScheduleIdForAddressAndIndex(holder, holdersVestingCount[holder] - 1)];
     }
 
     /**
